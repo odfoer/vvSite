@@ -1,0 +1,48 @@
+if (isset($_POST['id'])) {
+                        $id = $_POST['id']; 
+                        echo($id);
+                
+                        
+                $resulttx = $mysqli->query("SELECT * FROM news WHERE id='$id'");
+                $myrowtx = $resulttx->fetch_assoc();
+                
+                if (isset($_POST['data'])) {
+                        $data = $mysqli->real_escape_string($_POST['data']); 
+                        if ($data == $myrowtx['data']){
+                        echo("Текст збігся");
+                        }
+                        else {
+                                echo("Текст треба занести в базу");
+                                $mysqli->query("UPDATE news SET data='$data' WHERE id='$id'");
+                        }
+                }
+                if (isset($_POST['minitext'])) {
+                        $minitext = $mysqli->real_escape_string($_POST['minitext']); 
+                        if ($minitext == $myrowtx['minitext']){
+                        echo("Текст збігся");
+                        }
+                        else {
+                                echo("Текст треба занести в базу");
+                                $mysqli->query("UPDATE news SET minitext='$minitext' WHERE id='$id'");
+                        }
+                }
+				if (isset($_POST['theme'])) {
+                        $theme = $mysqli->real_escape_string($_POST['theme']); 
+                        if ($theme == $myrowtx['theme']){
+                        echo("Текст збігся");
+                        }
+                        else {
+                                echo("Текст треба занести в базу");
+                                $mysqli->query("UPDATE news SET theme='$theme' WHERE id='$id'");
+                        }
+                }
+				}
+				
+				
+				
+				<label>data:</label>
+										<input type='date' name='data'>
+										<label>minitext:</label>
+										<textarea style='background-color:silver;' type='text' required name='minitext' value=''></textarea>
+										<label>THEME:</label>
+										<textarea style='background-color:silver;' type='text' required name='theme' value=''></textarea>
